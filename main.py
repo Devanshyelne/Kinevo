@@ -1,7 +1,7 @@
 import streamlit as st
 
 from services.auth.login_wall import render_login_wall
-
+from services.state.session_efaults import initial_session_defaults
 
 def main():
     st.set_page_config(
@@ -13,6 +13,8 @@ def main():
 
     if not render_login_wall():
         return 
+
+    initial_session_defaults()
 
     st.write("Hello")
 
