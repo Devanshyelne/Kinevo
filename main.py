@@ -7,6 +7,7 @@ from services.ui.style_loader import load_css, inject_local_font
 from services.persistence.exercise_repository import init_db
 from streamlit_webrtc import webrtc_streamer, WebRtcMode
 from services.ui.style_loader import inject_webrtc_styles
+from services.vision.exercise_video_processor import VideoProcessorClass
 
 
 def main():
@@ -124,7 +125,6 @@ def main():
 
     st.title("AI Real-time GYM Coach")
 
-
     st.markdown("#### Real-time pose detection with proactive AI voice coaching")
 
     if not workout_started:
@@ -151,16 +151,21 @@ def main():
         context = webrtc_streamer(
             key="exercise-analysis",
             mode=WebRtcMode.SENDRECV,
-            video_processor_factory=None,
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+            video_processor_factory=VideoProcessorClass,
+            rtc_configuration={
+                "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+            },
             media_stream_constraints={"video": True, "audio": False},
             async_processing=True,
         )
 
+        inject_webrtc_styles()
+
+
     st.markdown("#### Workout History")
 
-    inject_webrtc_styles()
 
-    
+
+
 if __name__ == "__main__":
     main()
