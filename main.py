@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+from pathlib import Path
+load_dotenv(Path(__file__).resolve().parent / ".env")
 import streamlit as st
 import os
 import time

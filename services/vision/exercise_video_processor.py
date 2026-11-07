@@ -1,4 +1,13 @@
 import os
+import warnings
+
+# Suppress the deprecated Protobuf API warning from MediaPipe 0.10.14
+warnings.filterwarnings(
+    "ignore",
+    message=r".*SymbolDatabase.GetPrototype\(\) is deprecated.*",
+    category=UserWarning,
+)
+
 import cv2
 import av
 import numpy as np
