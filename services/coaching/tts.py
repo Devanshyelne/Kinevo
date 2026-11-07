@@ -1,4 +1,3 @@
-
 from io import BytesIO
 from gtts import gTTS
 
@@ -17,6 +16,4 @@ class TextToSpeech:
         buffer.seek(0)
 
         return buffer.read()
-
-
     
